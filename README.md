@@ -1,5 +1,7 @@
 # actual-budget-mcp-web
 
+<img width="1840" height="818" alt="image" src="https://github.com/user-attachments/assets/cbcf3271-e87c-4bbf-8cc9-26e730a9aa3c" />
+
 Landing page for [actual-budget-mcp](https://github.com/henfrydls/actual-budget-mcp), the MCP server that lets you manage your Actual Budget through natural conversation with Claude.
 
 ## What's in the page
