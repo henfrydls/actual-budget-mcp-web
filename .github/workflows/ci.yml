@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Check dist output exists
+        run: |
+          test -f dist/index.html
+          echo "Build output OK"
+
+      - name: Validate HTML meta tags
+        run: |
+          grep -q '<title>actual-budget-mcp' dist/index.html
+          grep -q 'meta name="description"' dist/index.html
+          grep -q 'og:title' dist/index.html
+          echo "Meta tags OK"
+
+      - name: Check no broken internal links
+        run: |
+          for file in dist/assets/*.js dist/assets/*.css; do
+            test -f "$file" || (echo "Missing: $file" && exit 1)
+          done
+          echo "Assets OK"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  lighthouse:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          uploadArtifacts: true
+          configPath: .github/lighthouse.json
