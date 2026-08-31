@@ -15,27 +15,29 @@ const prompts = [
 const categories = [
   {
     name: 'Read',
-    count: 7,
-    tools: 'accounts · budget · transactions · categories · payees · balances · summary',
+    count: 9,
+    tools: 'accounts · budget · transactions · categories · payees · rules · balances · history · summary',
   },
   {
     name: 'Analyze',
-    count: 4,
-    tools: 'budget vs actual · projections · trends · spending breakdown',
+    count: 5,
+    tools: 'budget vs actual · projections · category trends · spending breakdown · month summary',
   },
   {
-    name: 'Write',
-    count: 7,
-    tools: 'create · update · delete · transfer · budget amounts · recategorize · bank sync',
+    name: 'Write & maintain',
+    count: 23,
+    tools: 'create · split · update · delete · transfer · recategorize · budget amounts · categories · payees · rules · bank sync · currency reconciliation · sync repair',
   },
 ]
 
 const differentiators = [
-  'Works in any language - "last month", "este mes", "il mese scorso"',
-  'Natural language dates - no date pickers, just say when',
+  'Deletes stop and ask - every destructive tool shows what it will remove and waits for you to confirm',
+  'Read-only mode - set ACTUAL_READ_ONLY=1 and the write tools disappear from the model entirely',
+  'Analysis, not just lookups - projections, category trends, budget vs actual',
+  'Multi-currency that survives reality - split transactions and residual reconciliation',
   'Say names, not IDs - "Checking" or "Groceries", not UUIDs',
-  'Formatted tables, not raw JSON',
-  'Built on @actual-app/api 26.x',
+  'Natural dates in English and Spanish - "last month", "este mes", "hace 3 meses"',
+  'Built on @actual-app/api 26.8, and tested against the version you install',
 ]
 
 function App() {
@@ -89,7 +91,7 @@ function App() {
               Ask your budget anything.
             </h1>
             <p className="text-center text-[#a1a1a8] text-lg mb-10 max-w-md mx-auto">
-              Connect Claude to your Actual Budget. Ask questions. Get real answers from your real data.
+              Connect Claude to your Actual Budget. Ask where the money went, get real analysis back, and let it write without holding your breath.
             </p>
 
             <TypingTerminal />
@@ -102,7 +104,7 @@ function App() {
 
             {/* Install */}
             <div className="mt-6 max-w-xl mx-auto">
-              <CopyCommand command="claude mcp add actual-budget -- npx -y actual-budget-mcp" />
+              <CopyCommand command="claude mcp add actual-budget-mcp -e ACTUAL_SERVER_URL=http://localhost:5006 -e ACTUAL_PASSWORD=your-password -e ACTUAL_BUDGET_ID=your-budget-id -- npx -y actual-budget-mcp" />
             </div>
           </div>
         </section>
@@ -192,7 +194,7 @@ function App() {
             Read, analyze, and edit.
           </h2>
           <p className="text-[#7e7e85] mb-10 text-sm">
-            18 tools across 3 categories. Everything you need without leaving the conversation.
+            37 tools across 3 categories. Everything you need without leaving the conversation.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-14">
@@ -223,6 +225,24 @@ function App() {
           </div>
         </Section>
 
+        {/* See it work */}
+        <Section className="pt-10 sm:pt-14 pb-8">
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-3">See it work.</h2>
+          <p className="text-[#7e7e85] mb-6 text-sm">
+            A real session against a demo budget. Note the second half: the delete stops and
+            asks, because the transaction was already cleared.
+          </p>
+          <img
+            src="/demo.gif"
+            alt="Terminal session: asking where the money went in July returns a spending table with over-budget categories, then asking to delete a Netflix charge stops to ask for confirmation"
+            width={1360}
+            height={720}
+            loading="lazy"
+            decoding="async"
+            className="w-full rounded-lg border border-white/[0.09]"
+          />
+        </Section>
+
         {/* Install */}
         <Section className="pt-10 sm:pt-14 pb-8">
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-6">
@@ -242,7 +262,11 @@ function App() {
           <div className="space-y-3">
             <CopyCommand
               label="Claude Code"
-              command="claude mcp add actual-budget -- npx -y actual-budget-mcp"
+              command="claude mcp add actual-budget-mcp -e ACTUAL_SERVER_URL=http://localhost:5006 -e ACTUAL_PASSWORD=your-password -e ACTUAL_BUDGET_ID=your-budget-id -- npx -y actual-budget-mcp"
+            />
+            <CopyCommand
+              label="Docker"
+              command="docker run -i --rm -v actual-budget-mcp-data:/data ghcr.io/henfrydls/actual-budget-mcp:latest"
             />
             <CopyCommand
               label="npx"
@@ -251,7 +275,7 @@ function App() {
           </div>
 
           <p className="text-[#5a5a62] text-xs font-mono mt-4">
-            Then set ACTUAL_SERVER_URL and ACTUAL_PASSWORD as environment variables.
+            Your budget ID is the Sync ID in Actual under Settings → Show advanced settings.
           </p>
 
           <div className="flex gap-6 mt-8">
