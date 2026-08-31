@@ -165,7 +165,7 @@ function App() {
                 Actual Budget
               </span>
             </div>
-            <p className="text-[#5a5a62] mt-3">Local connection only. No cloud. No intermediaries.</p>
+            <p className="text-[#7e7e85] mt-3">Local connection only. No cloud. No intermediaries.</p>
           </div>
         </Section>
 
@@ -274,7 +274,7 @@ function App() {
             />
           </div>
 
-          <p className="text-[#5a5a62] text-xs font-mono mt-4">
+          <p className="text-[#7e7e85] text-xs font-mono mt-4">
             Your budget ID is the Sync ID in Actual under Settings → Show advanced settings.
           </p>
 
@@ -303,7 +303,7 @@ function App() {
 
       {/* Footer */}
       <footer className="max-w-[680px] mx-auto px-6 py-12 border-t border-white/[0.09]">
-        <p className="font-mono text-xs text-[#5a5a62]">
+        <p className="font-mono text-xs text-[#7e7e85]">
           Published by{' '}
           <span className="text-[#7e7e85]">DLSLabs</span>
           {' · '}
@@ -312,7 +312,7 @@ function App() {
             href="https://github.com/henfrydls"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#7e7e85] hover:text-[#a1a1a8] transition-colors duration-200 cursor-pointer"
+            className="text-[#7e7e85] underline underline-offset-2 hover:text-[#a1a1a8] transition-colors duration-200 cursor-pointer"
             aria-label="henfrydls on GitHub (opens in new tab)"
           >
             @henfrydls

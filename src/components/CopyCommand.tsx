@@ -22,11 +22,11 @@ export function CopyCommand({ command, label }: CopyCommandProps) {
       aria-label={`Copy command: ${command}`}
     >
       {label && (
-        <span className="text-[#5a5a62] text-xs shrink-0">{label}</span>
+        <span className="text-[#7e7e85] text-xs shrink-0">{label}</span>
       )}
-      <span className="text-[#5a5a62] shrink-0">$</span>
+      <span className="text-[#7e7e85] shrink-0">$</span>
       <span className="text-[#a1a1a8] flex-1 overflow-hidden text-ellipsis whitespace-nowrap">{command}</span>
-      <span className="text-[#5a5a62] group-hover:text-[#7e7e85] transition-colors duration-200 shrink-0">
+      <span className="text-[#7e7e85] group-hover:text-[#a1a1a8] transition-colors duration-200 shrink-0">
         {copied ? (
           <CheckIcon className="w-3.5 h-3.5 text-emerald-400" />
         ) : (

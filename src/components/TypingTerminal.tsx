@@ -184,19 +184,19 @@ export function TypingTerminal() {
       {/* Screen reader version */}
       <div className="sr-only"><pre>{staticContent}</pre></div>
 
-      <div className="terminal-container rounded-xl border border-white/[0.09] bg-[#141417] overflow-hidden relative" aria-hidden="true">
+      <div className="terminal-container rounded-xl border border-white/[0.09] bg-[#141417] overflow-hidden relative">
         {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.09] bg-[#111114]">
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.09] bg-[#111114]" aria-hidden="true">
           <div className="flex gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-white/[0.15]" />
             <div className="w-2.5 h-2.5 rounded-full bg-white/[0.15]" />
             <div className="w-2.5 h-2.5 rounded-full bg-white/[0.15]" />
           </div>
-          <span className="font-mono text-[11px] text-[#5a5a62] ml-2">claude · actual-budget-mcp</span>
+          <span className="font-mono text-[11px] text-[#7e7e85] ml-2">claude · actual-budget-mcp</span>
         </div>
 
         {/* Content */}
-        <div ref={terminalRef} className="p-5 space-y-4 h-[360px] overflow-y-auto">
+        <div ref={terminalRef} className="p-5 space-y-4 h-[360px] overflow-y-auto" aria-hidden="true">
           {completedMessages.map((msg, i) => (
             <div key={i}>{renderMessage(msg, msg.content, false)}</div>
           ))}
@@ -223,7 +223,7 @@ export function TypingTerminal() {
                 setPaused(true)
               }
             }}
-            className="font-mono text-[10px] text-[#5a5a62] hover:text-[#a1a1a8] transition-colors duration-200 cursor-pointer bg-[#111114] border border-white/[0.09] rounded px-2.5 py-1 hover:border-white/[0.15]"
+            className="font-mono text-[10px] text-[#7e7e85] hover:text-[#a1a1a8] transition-colors duration-200 cursor-pointer bg-[#111114] border border-white/[0.09] rounded px-2.5 py-1 hover:border-white/[0.15]"
             aria-label={paused ? 'Play terminal animation' : 'Pause terminal animation'}
           >
             {paused ? '▶' : '⏸'}
