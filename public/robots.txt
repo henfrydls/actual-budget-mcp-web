@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://actual-mcp.henfrydls.com/sitemap.xml

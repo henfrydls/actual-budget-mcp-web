@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connect Actual Budget to Claude</title>
+    <meta name="description" content="How to connect Actual Budget to Claude Desktop or Claude Code with the actual-budget-mcp server: one command for Claude Code, a short config block for Claude Desktop, and how to check that it worked." />
+    <link rel="canonical" href="https://actual-mcp.henfrydls.com/connect-claude/" />
+    <meta property="og:title" content="Connect Actual Budget to Claude" />
+    <meta property="og:description" content="One command for Claude Code, a short config block for Claude Desktop. Your budget stays on your machine." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://actual-mcp.henfrydls.com/connect-claude/" />
+    <meta property="og:image" content="https://actual-mcp.henfrydls.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://actual-mcp.henfrydls.com/og-image.png" />
+    <meta name="author" content="DLSLabs" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <script defer src="https://analytics.henfrydls.com/stats.js" data-website-id="c925c782-a4fd-4d67-aec8-fc245ae89f45"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Connect Actual Budget to Claude",
+      "description": "Connect a self-hosted Actual Budget server to Claude Desktop or Claude Code using the actual-budget-mcp MCP server.",
+      "url": "https://actual-mcp.henfrydls.com/connect-claude/",
+      "totalTime": "PT5M",
+      "tool": [
+        { "@type": "HowToTool", "name": "Actual Budget server" },
+        { "@type": "HowToTool", "name": "Node.js 20 or newer" },
+        { "@type": "HowToTool", "name": "Claude Desktop or Claude Code" }
+      ],
+      "step": [
+        { "@type": "HowToStep", "name": "Copy the Sync ID from Actual", "text": "In Actual Budget open Settings, click Show advanced settings and copy the Sync ID. It is the value labelled Sync ID, not Budget ID." },
+        { "@type": "HowToStep", "name": "Add the server to your Claude client", "text": "Claude Code: run the claude mcp add command with your server URL, password and Sync ID. Claude Desktop: add the actual-budget-mcp block to claude_desktop_config.json." },
+        { "@type": "HowToStep", "name": "Restart the client", "text": "Claude Desktop and Claude Code read MCP configuration at startup. Restart them after editing." },
+        { "@type": "HowToStep", "name": "Ask a question", "text": "Ask Claude what you spent on groceries last month. The first answer takes a few seconds while the budget downloads." }
+      ]
+    }
+    </script>
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: #0d0d10;
+        color: #f4f4f6;
+        font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+      a:hover { color: #a1a1a8; }
+      header { border-bottom: 1px solid rgba(255,255,255,0.09); }
+      .nav { max-width: 680px; margin: 0 auto; padding: 0 24px; height: 48px; display: flex; align-items: center; justify-content: space-between; }
+      .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .nav a { text-decoration: none; font-size: 13px; color: #a1a1a8; }
+      .nav a:hover { color: #f4f4f6; }
+      main { max-width: 680px; margin: 0 auto; padding: 56px 24px 64px; }
+      h1 { font-size: 2.25rem; line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; margin: 0 0 20px; text-wrap: balance; }
+      h2 { font-size: 1.5rem; letter-spacing: -0.01em; font-weight: 600; margin: 48px 0 12px; }
+      h3 { font-size: 1.05rem; font-weight: 600; margin: 28px 0 8px; }
+      p { margin: 0 0 14px; }
+      .lede { font-size: 1.125rem; color: #a1a1a8; }
+      .answer { border-left: 2px solid rgba(16,185,129,0.6); padding: 2px 0 2px 18px; margin: 24px 0 8px; }
+      .muted { color: #7e7e85; font-size: 0.9rem; }
+      .small { font-size: 0.8rem; }
+      pre {
+        background: #131317;
+        border: 1px solid rgba(255,255,255,0.09);
+        border-radius: 8px;
+        padding: 14px 16px;
+        overflow-x: auto;
+        font-size: 0.8rem;
+        line-height: 1.55;
+        margin: 10px 0 14px;
+      }
+      code { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      p code, li code { background: #131317; border: 1px solid rgba(255,255,255,0.09); border-radius: 4px; padding: 1px 5px; font-size: 0.85em; }
+      ol, ul { padding-left: 22px; margin: 0 0 14px; }
+      li { margin: 4px 0; }
+      .check { list-style: none; padding: 0; }
+      .check li::before { content: '\2713'; color: rgba(16,185,129,0.6); margin-right: 10px; }
+      .check li { font-size: 0.9rem; color: #7e7e85; }
+      footer { max-width: 680px; margin: 0 auto; padding: 40px 24px; border-top: 1px solid rgba(255,255,255,0.09); font-size: 0.75rem; color: #7e7e85; }
+      @media (max-width: 480px) { h1 { font-size: 1.85rem; } main { padding-top: 40px; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <a href="/" class="mono">actual-budget-mcp</a>
+        <a href="https://github.com/henfrydls/actual-budget-mcp" class="mono" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Connect Actual Budget to Claude</h1>
+      <p class="lede">
+        Claude cannot see your Actual Budget on its own. An MCP server sits between the two: Claude asks it questions, it reads your budget from your own Actual server, and nothing is sent anywhere else.
+      </p>
+
+      <div class="answer">
+        <p>
+          <strong>The short version.</strong> Install <a href="https://github.com/henfrydls/actual-budget-mcp">actual-budget-mcp</a> and give it three values: your Actual server URL, its password, and the budget's Sync ID. In Claude Code that is one command. In Claude Desktop it is a short block in <code>claude_desktop_config.json</code>. Restart the client, then ask Claude what you spent last month. It runs on your machine and talks only to your Actual server. It is listed in the <a href="https://actualbudget.org/docs/community-repos/" target="_blank" rel="noopener noreferrer">official Actual Budget community projects</a>.
+        </p>
+      </div>
+
+      <h2>Before you start</h2>
+      <ul class="check">
+        <li>An Actual Budget server you can reach, local or remote, with the password set in Settings.</li>
+        <li>Node.js 20 or newer (<code>node --version</code> to check).</li>
+        <li>Claude Desktop or Claude Code installed.</li>
+      </ul>
+
+      <h2>1. Copy the Sync ID from Actual</h2>
+      <ol>
+        <li>Open Actual Budget.</li>
+        <li>Open <strong>Settings</strong>: click the arrow next to your budget name, or use the sidebar, <strong>More</strong>, then <strong>Settings</strong>.</li>
+        <li>Click <strong>Show advanced settings</strong>.</li>
+        <li>Copy the <strong>Sync ID</strong>.</li>
+      </ol>
+      <p class="muted">
+        Take the Sync ID, not the Budget ID. Actual shows both, one under the other, and both look like UUIDs. The variable is called <code>ACTUAL_BUDGET_ID</code> but it wants the Sync ID. If Sync ID shows <em>(none)</em>, the budget has never been synced to a server and needs to be synced first.
+      </p>
+
+      <h2>2. Add the server to Claude</h2>
+
+      <h3>Claude Code</h3>
+      <p>One command. Replace the three values with yours:</p>
+<pre><code>claude mcp add actual-budget-mcp \
+  -e ACTUAL_SERVER_URL=http://localhost:5006 \
+  -e ACTUAL_PASSWORD=your-password \
+  -e ACTUAL_BUDGET_ID=your-sync-id \
+  -- npx -y actual-budget-mcp</code></pre>
+
+      <h3>Claude Desktop</h3>
+      <p>Open the config file and add the <code>actual-budget-mcp</code> entry under <code>mcpServers</code>. Create the file if it does not exist.</p>
+      <p class="muted small mono">
+        macOS: ~/Library/Application Support/Claude/claude_desktop_config.json<br />
+        Windows: %APPDATA%\Claude\claude_desktop_config.json
+      </p>
+<pre><code>{
+  "mcpServers": {
+    "actual-budget-mcp": {
+      "command": "npx",
+      "args": ["-y", "actual-budget-mcp"],
+      "env": {
+        "ACTUAL_SERVER_URL": "http://localhost:5006",
+        "ACTUAL_PASSWORD": "your-password",
+        "ACTUAL_BUDGET_ID": "your-sync-id"
+      }
+    }
+  }
+}</code></pre>
+      <p class="muted">
+        If your budget file is encrypted, add <code>"ACTUAL_ENCRYPTION_PASSWORD"</code> to the same <code>env</code> block. Cursor, VS Code and Docker instructions are in the <a href="https://github.com/henfrydls/actual-budget-mcp#installation">README</a>.
+      </p>
+
+      <h2>3. Restart the client</h2>
+      <p>
+        Claude Desktop and Claude Code read MCP configuration when they start, so an edit is not picked up until you quit and reopen them. This is the step most people miss.
+      </p>
+
+      <h2>4. Ask something</h2>
+      <p>
+        Try <em>"What did I spend on groceries last month?"</em> or <em>"Which categories am I over budget in?"</em> The first answer takes a few seconds while the server downloads your budget; after that it is quick.
+      </p>
+
+      <h2>If it does not work</h2>
+      <p>Run the same package with <code>--verify</code> in a terminal. It connects, downloads the budget and prints how many accounts and category groups it found:</p>
+<pre><code>ACTUAL_SERVER_URL=http://localhost:5006 \
+ACTUAL_PASSWORD=your-password \
+ACTUAL_BUDGET_ID=your-sync-id \
+npx -y actual-budget-mcp --verify</code></pre>
+      <ul>
+        <li><code>Budget "..." not found on the server</code> almost always means you copied the Budget ID instead of the Sync ID.</li>
+        <li>A connection error means the URL is wrong or the Actual server is not reachable from this machine.</li>
+        <li>If Claude still lists no tools after the check passes, the client was not restarted.</li>
+      </ul>
+      <p class="muted">
+        Still stuck? <a href="https://github.com/henfrydls/actual-budget-mcp/issues">Open an issue</a> with the output of <code>--verify</code>, without your password.
+      </p>
+
+      <h2>What Claude can do once connected</h2>
+      <p>
+        Read accounts, transactions, categories and budgets; compare budget against actual, show trends and project spending; and write when you ask it to: add or fix transactions, move money between categories, manage payees and rules. Every delete previews what it will remove and waits for you to confirm. There is also an opt-in read-only mode if you only want questions answered. The <a href="/#tools">full list of tools</a> is on the home page.
+      </p>
+    </main>
+
+    <footer>
+      <p class="mono">
+        Published by DLSLabs · Created by <a href="https://github.com/henfrydls" target="_blank" rel="noopener noreferrer">@henfrydls</a> · <a href="/">Home</a>
+      </p>
+    </footer>
+  </body>
+</html>

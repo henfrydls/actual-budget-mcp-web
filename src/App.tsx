@@ -101,6 +101,19 @@ function App() {
               <ShieldIcon className="w-3.5 h-3.5" />
               <span>Runs locally. Your financial data never leaves your machine.</span>
             </div>
+            <p className="text-center mt-2 text-[#7e7e85] text-sm">
+              Listed in the{' '}
+              <a
+                href="https://actualbudget.org/docs/community-repos/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-[#a1a1a8] transition-colors duration-200 cursor-pointer"
+                aria-label="Actual Budget community projects (opens in new tab)"
+              >
+                official Actual Budget community projects
+              </a>
+              .
+            </p>
 
             {/* Install */}
             <div className="mt-6 max-w-xl mx-auto">
@@ -189,7 +202,7 @@ function App() {
         </Section>
 
         {/* Capabilities */}
-        <Section className="pt-10 sm:pt-14 pb-8">
+        <Section id="tools" className="pt-10 sm:pt-14 pb-8">
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-3">
             Read, analyze, and edit.
           </h2>
@@ -276,6 +289,16 @@ function App() {
 
           <p className="text-[#7e7e85] text-xs font-mono mt-4">
             Your budget ID is the Sync ID in Actual under Settings → Show advanced settings.
+          </p>
+          <p className="text-[#7e7e85] text-xs font-mono mt-2">
+            Using Claude Desktop?{' '}
+            <a
+              href="/connect-claude/"
+              className="underline underline-offset-2 hover:text-[#a1a1a8] transition-colors duration-200 cursor-pointer"
+            >
+              How to connect Actual Budget to Claude
+            </a>
+            , step by step.
           </p>
 
           <div className="flex gap-6 mt-8">
