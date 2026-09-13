@@ -158,6 +158,9 @@
       <p class="muted">
         If your budget file is encrypted, add <code>"ACTUAL_ENCRYPTION_PASSWORD"</code> to the same <code>env</code> block. Cursor, VS Code and Docker instructions are in the <a href="https://github.com/henfrydls/actual-budget-mcp#installation">README</a>.
       </p>
+      <p class="muted">
+        Signing in through OIDC? Your server has no password to put here. Use <code>ACTUAL_SESSION_TOKEN</code> instead of <code>ACTUAL_PASSWORD</code>, from version 0.9.0 on.
+      </p>
 
       <h2>3. Restart the client</h2>
       <p>
@@ -167,6 +170,11 @@
       <h2>4. Ask something</h2>
       <p>
         Try <em>"What did I spend on groceries last month?"</em> or <em>"Which categories am I over budget in?"</em> The first answer takes a few seconds while the server downloads your budget; after that it is quick.
+      </p>
+
+      <h2>Where it keeps your budget</h2>
+      <p>
+        The server downloads a copy of your budget so it does not have to fetch it again on every question. It lives in <code>~/.local/share/actual-budget-mcp</code> on Linux, <code>~/Library/Application Support/actual-budget-mcp</code> on macOS and <code>%APPDATA%\actual-budget-mcp</code> on Windows. It is a cache, not your data: deleting it costs one re-download, and your budget stays on your Actual server. Point <code>ACTUAL_DATA_DIR</code> somewhere else if you prefer. Versions before 0.9.0 kept it in a folder under <code>/tmp</code>, which many systems empty on reboot.
       </p>
 
       <h2>If it does not work</h2>
