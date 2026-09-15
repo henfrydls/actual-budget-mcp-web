@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy for actual-budget-mcp</title>
+    <meta name="description" content="What the actual-budget-mcp server does with your data: it talks only to your own Actual Budget server, keeps a local cache you can delete, never stores your credentials and sends nothing to anyone." />
+    <link rel="canonical" href="https://actual-mcp.henfrydls.com/privacy/" />
+    <meta property="og:title" content="Privacy Policy for actual-budget-mcp" />
+    <meta property="og:description" content="The server talks only to your own Actual Budget server and sends nothing to anyone." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://actual-mcp.henfrydls.com/privacy/" />
+    <meta property="og:image" content="https://actual-mcp.henfrydls.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://actual-mcp.henfrydls.com/og-image.png" />
+    <meta name="author" content="DLSLabs" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <script defer src="https://analytics.henfrydls.com/stats.js" data-website-id="c925c782-a4fd-4d67-aec8-fc245ae89f45"></script>
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: #0d0d10;
+        color: #f4f4f6;
+        font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+      a:hover { color: #a1a1a8; }
+      header { border-bottom: 1px solid rgba(255,255,255,0.09); }
+      .nav { max-width: 680px; margin: 0 auto; padding: 0 24px; height: 48px; display: flex; align-items: center; justify-content: space-between; }
+      .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .nav a { text-decoration: none; font-size: 13px; color: #a1a1a8; }
+      .nav a:hover { color: #f4f4f6; }
+      main { max-width: 680px; margin: 0 auto; padding: 56px 24px 64px; }
+      h1 { font-size: 2.25rem; line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; margin: 0 0 20px; text-wrap: balance; }
+      h2 { font-size: 1.5rem; letter-spacing: -0.01em; font-weight: 600; margin: 48px 0 12px; }
+      h3 { font-size: 1.05rem; font-weight: 600; margin: 28px 0 8px; }
+      p { margin: 0 0 14px; }
+      .lede { font-size: 1.125rem; color: #a1a1a8; }
+      .answer { border-left: 2px solid rgba(16,185,129,0.6); padding: 2px 0 2px 18px; margin: 24px 0 8px; }
+      .muted { color: #7e7e85; font-size: 0.9rem; }
+      .small { font-size: 0.8rem; }
+      pre {
+        background: #131317;
+        border: 1px solid rgba(255,255,255,0.09);
+        border-radius: 8px;
+        padding: 14px 16px;
+        overflow-x: auto;
+        font-size: 0.8rem;
+        line-height: 1.55;
+        margin: 10px 0 14px;
+      }
+      code { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      p code, li code { background: #131317; border: 1px solid rgba(255,255,255,0.09); border-radius: 4px; padding: 1px 5px; font-size: 0.85em; }
+      ol, ul { padding-left: 22px; margin: 0 0 14px; }
+      li { margin: 4px 0; }
+      .check { list-style: none; padding: 0; }
+      .check li::before { content: '\2713'; color: rgba(16,185,129,0.6); margin-right: 10px; }
+      .check li { font-size: 0.9rem; color: #7e7e85; }
+      footer { max-width: 680px; margin: 0 auto; padding: 40px 24px; border-top: 1px solid rgba(255,255,255,0.09); font-size: 0.75rem; color: #7e7e85; }
+      @media (max-width: 480px) { h1 { font-size: 1.85rem; } main { padding-top: 40px; } }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="nav">
+        <a href="/" class="mono">actual-budget-mcp</a>
+        <a href="https://github.com/henfrydls/actual-budget-mcp" class="mono" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Privacy Policy</h1>
+      <p class="lede">
+        actual-budget-mcp is an MCP server that connects your Actual Budget to Claude and other MCP clients. It runs on your machine. This page says what it does with your data, which is very little, and what this website does, which is a bit more.
+      </p>
+      <p class="muted small">Last updated 15 September 2026. Applies to actual-budget-mcp 0.9.0 and later, including the Claude Desktop extension.</p>
+
+      <div class="answer">
+        <p>
+          <strong>The short version.</strong> The server talks to exactly one place: the Actual Budget server you point it at. It keeps a copy of your budget on your own disk so it does not have to download it for every question. It never stores your password or token, never sends anything to us or to anyone else, and has no telemetry of any kind.
+        </p>
+      </div>
+
+      <h2>What the server collects</h2>
+      <p>
+        Nothing. The server has no account with us, no sign-up, no identifier, and no code path that contacts any host other than your Actual Budget server. We cannot see whether you installed it, how often you use it, or what you ask.
+      </p>
+
+      <h2>Where your data goes</h2>
+      <p>
+        When you ask a question, your MCP client (Claude Desktop, Claude Code, Cursor or any other) calls a tool on the server. The server reads or writes your budget through the official <code>@actual-app/api</code> library, against the server URL you configured. The answer goes back to your MCP client. What that client then does with it is governed by its own privacy policy, not by this one.
+      </p>
+      <p>
+        If you use the <code>run_bank_sync</code> tool, it asks your Actual Budget server to run the bank sync you have already set up there. The connection to your bank goes from your Actual server, not from this one.
+      </p>
+
+      <h2>What is stored on your machine</h2>
+      <p>
+        The server keeps a local copy of your budget file so that questions are answered quickly. It is a cache, not your data: your budget lives on your Actual server, and deleting the cache costs one re-download. It sits in <code>~/.local/share/actual-budget-mcp</code> on Linux, <code>~/Library/Application Support/actual-budget-mcp</code> on macOS and <code>%APPDATA%\actual-budget-mcp</code> on Windows, unless you set <code>ACTUAL_DATA_DIR</code>. It stays there until you delete it. We never see it.
+      </p>
+
+      <h2>Your credentials</h2>
+      <p>
+        The server needs your Actual server URL, your Sync ID, and either your server password or a session token. It reads them from environment variables each time it starts and keeps them in memory only while it runs. It does not write them to disk and does not log them.
+      </p>
+      <p>
+        Where they are stored between runs depends on how you installed it. With the Claude Desktop extension, the password and token are marked sensitive and Claude Desktop keeps them in your operating system's credential store. With a manual configuration, they are in the config file you wrote, in plain text, protected by your file permissions.
+      </p>
+
+      <h2>Third parties</h2>
+      <p>
+        None receive your data from the server. The code is open source under the MIT licence at <a href="https://github.com/henfrydls/actual-budget-mcp" target="_blank" rel="noopener noreferrer">github.com/henfrydls/actual-budget-mcp</a>, and you can read every network call it makes.
+      </p>
+      <p>
+        Two things are worth naming because they are also true. The model you are talking to, Claude or whichever your client uses, necessarily sees the budget data you ask about, under that provider's own terms; this server cannot change that, and you should read those terms as carefully as this page. And installing with <code>npx</code> downloads the package from npm, which is an ordinary package download and carries no budget data, but is a network connection you did not explicitly choose.
+      </p>
+
+      <h2>Retention</h2>
+      <p>
+        We retain nothing, because we receive nothing. The local cache is yours and lasts until you delete it.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        Privacy laws such as the GDPR give you the right to access, correct and delete the data an organisation holds about you. We hold none, so there is nothing for us to hand over or erase. Everything the server touches is already on your machine or on your own Actual server, under your control.
+      </p>
+
+      <h2>This website</h2>
+      <p>
+        actual-mcp.henfrydls.com uses a self-hosted instance of Umami to count page views. It sets no cookies and does not store IP addresses or anything that identifies you. It tells us how many people read a page and roughly where they came from, and nothing about you.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        If the server ever starts sending data anywhere other than your Actual server, this page will say so before that version is released, and the change will be in the release notes. We do not plan to. Adding telemetry to a tool that reads your finances would undo the point of running it yourself.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about privacy: open an issue at <a href="https://github.com/henfrydls/actual-budget-mcp/issues" target="_blank" rel="noopener noreferrer">github.com/henfrydls/actual-budget-mcp/issues</a>, or write to <a href="mailto:henfry.delossantos@gmail.com">henfry.delossantos@gmail.com</a>.
+      </p>
+    </main>
+
+    <footer>
+      <p class="mono">
+        Published by DLSLabs · Created by <a href="https://github.com/henfrydls" target="_blank" rel="noopener noreferrer">@henfrydls</a> · <a href="/">Home</a>
+      </p>
+    </footer>
+  </body>
+</html>
