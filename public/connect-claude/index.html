@@ -156,6 +156,9 @@
   }
 }</code></pre>
       <p class="muted">
+        Which port? A self-hosted sync server is usually <code>5006</code>. The desktop app runs its own server on <code>5007</code>, only while the app is open, and only for the same machine: from another computer or a virtual machine you need an SSH tunnel to it.
+      </p>
+      <p class="muted">
         If your budget file is encrypted, add <code>"ACTUAL_ENCRYPTION_PASSWORD"</code> to the same <code>env</code> block. Cursor, VS Code and Docker instructions are in the <a href="https://github.com/henfrydls/actual-budget-mcp#installation">README</a>.
       </p>
       <p class="muted">
@@ -185,7 +188,7 @@ ACTUAL_BUDGET_ID=your-sync-id \
 npx -y actual-budget-mcp --verify</code></pre>
       <ul>
         <li><code>Budget "..." not found on the server</code> almost always means you copied the Budget ID instead of the Sync ID.</li>
-        <li>A connection error means the URL is wrong or the Actual server is not reachable from this machine.</li>
+        <li>A connection error means the URL is wrong or the Actual server is not reachable from this machine. If you use the desktop app, the port is <code>5007</code>, not <code>5006</code>, and the app has to be open.</li>
         <li>If Claude still lists no tools after the check passes, the client was not restarted.</li>
       </ul>
       <p class="muted">
