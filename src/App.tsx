@@ -118,6 +118,16 @@ function App() {
             {/* Install */}
             <div className="mt-6 max-w-xl mx-auto">
               <CopyCommand command="claude mcp add actual-budget-mcp -e ACTUAL_SERVER_URL=http://localhost:5006 -e ACTUAL_PASSWORD=your-password -e ACTUAL_BUDGET_ID=your-budget-id -- npx -y actual-budget-mcp" />
+              <p className="text-[#7e7e85] text-xs font-mono mt-3">
+                On Claude Desktop there is nothing to paste:{' '}
+                <a
+                  href="#install"
+                  className="underline underline-offset-2 hover:text-[#a1a1a8] transition-colors duration-200 cursor-pointer"
+                >
+                  install the extension
+                </a>
+                .
+              </p>
             </div>
           </div>
         </section>
@@ -131,8 +141,8 @@ function App() {
             {[
               {
                 step: '01',
-                title: 'Install in one command',
-                desc: 'One line. No config files, no cloud accounts, no API keys to manage.',
+                title: 'Install the extension, or one command',
+                desc: 'Drag one file into Claude Desktop, or paste a single line for Claude Code, Cursor or Docker. No cloud accounts, no API keys to manage.',
               },
               {
                 step: '02',
@@ -257,9 +267,9 @@ function App() {
         </Section>
 
         {/* Install */}
-        <Section className="pt-10 sm:pt-14 pb-8">
+        <Section id="install" className="pt-10 sm:pt-14 pb-8">
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-6">
-            Get started in 10 seconds.
+            Get started.
           </h2>
 
           {/* Prereqs as checklist -MOVED from hero */}
@@ -268,9 +278,31 @@ function App() {
               <span className="text-emerald-500/60">✓</span> Actual Budget running with the server enabled
             </p>
             <p className="text-[#7e7e85] text-sm font-mono flex items-center gap-2">
-              <span className="text-emerald-500/60">✓</span> Claude Code installed
+              <span className="text-emerald-500/60">✓</span> Claude Desktop, Claude Code, or any MCP client
             </p>
           </div>
+
+          {/* Desktop extension: the shortest route, so it goes first */}
+          <div className="mb-8 rounded-lg border border-emerald-500/20 bg-emerald-500/[0.04] p-5">
+            <p className="font-mono text-xs text-emerald-500/70 mb-2">Claude Desktop</p>
+            <h3 className="text-lg font-medium mb-2">Install the extension</h3>
+            <p className="text-[#7e7e85] text-sm leading-relaxed mb-4">
+              One file, nothing to compile and no config to edit. Open Claude Desktop, go to Settings, then
+              Extensions, and drag the file there. Fill in your server URL, Sync ID and password, and ask.
+            </p>
+            <a
+              href="https://github.com/henfrydls/actual-budget-mcp/releases/latest/download/actual-budget-mcp.mcpb"
+              className="inline-flex items-center gap-1.5 font-mono text-sm rounded-md border border-emerald-500/30 px-4 py-2.5 text-[#f4f4f6] hover:bg-emerald-500/10 transition-colors duration-200 cursor-pointer min-h-[44px]"
+            >
+              Download the extension <ArrowRightIcon />
+            </a>
+            <p className="text-[#7e7e85] text-xs font-mono mt-3">
+              56 MB, everything included. Needs Node.js 22 or newer. On Windows, drag it into Settings, Extensions:
+              double-clicking the file does not open Claude.
+            </p>
+          </div>
+
+          <p className="text-[#a1a1a8] text-sm mb-3">Other clients, from the command line:</p>
 
           <div className="space-y-3">
             <CopyCommand
@@ -291,14 +323,14 @@ function App() {
             Your budget ID is the Sync ID in Actual under Settings → Show advanced settings.
           </p>
           <p className="text-[#7e7e85] text-xs font-mono mt-2">
-            Using Claude Desktop?{' '}
+            Step by step, with screenshots of what to fill in:{' '}
             <a
               href="/connect-claude/"
               className="underline underline-offset-2 hover:text-[#a1a1a8] transition-colors duration-200 cursor-pointer"
             >
               How to connect Actual Budget to Claude
             </a>
-            , step by step.
+            .
           </p>
 
           <div className="flex gap-6 mt-8">
