@@ -29,7 +29,7 @@
       "totalTime": "PT5M",
       "tool": [
         { "@type": "HowToTool", "name": "Actual Budget server" },
-        { "@type": "HowToTool", "name": "Node.js 22 or newer" },
+        { "@type": "HowToTool", "name": "Node.js 22 or newer, only without the extension" },
         { "@type": "HowToTool", "name": "Claude Desktop or Claude Code" }
       ],
       "step": [
@@ -111,7 +111,7 @@
       <h2>Before you start</h2>
       <ul class="check">
         <li>An Actual Budget server you can reach, local or remote, with the password set in Settings.</li>
-        <li>Node.js 22 or newer (<code>node --version</code> to check).</li>
+        <li>Node.js 22 or newer, only if you are not using the extension (<code>node --version</code> to check). The extension runs on the Node that Claude Desktop ships with.</li>
         <li>Claude Desktop or Claude Code installed.</li>
       </ul>
 
@@ -133,7 +133,7 @@
         The shortest route, and the one to take unless you have a reason not to. Download <a href="https://github.com/henfrydls/actual-budget-mcp/releases/latest/download/actual-budget-mcp.mcpb"><strong>actual-budget-mcp.mcpb</strong></a>, then in Claude Desktop open <strong>Settings</strong>, go to <strong>Extensions</strong>, and drag the file onto that screen. Claude asks for your server URL, Sync ID and password in a form, and keeps the password in your operating system's credential store.
       </p>
       <p class="muted">
-        On Windows, drag the file into that screen: double-clicking it does not open Claude, because the app does not register the <code>.mcpb</code> file type. The extension carries everything it needs and does not compile anything, so it needs Node.js 22 or newer and nothing else. It is 56 MB, downloaded once.
+        On Windows, drag the file into that screen: double-clicking it does not open Claude, because the app does not register the <code>.mcpb</code> file type. The extension carries everything it needs and does not compile anything, and it does not need Node.js installed either: Claude Desktop runs it on the Node it ships with. Checked on Windows 11 with Node renamed out of the way. It is 56 MB, downloaded once.
       </p>
       <p class="muted">
         Prefer to edit the configuration by hand, or use a different client? The rest of this step covers that.
