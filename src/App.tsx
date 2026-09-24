@@ -323,6 +323,9 @@ function App() {
             Your budget ID is the Sync ID in Actual under Settings → Show advanced settings.
           </p>
           <p className="text-[#7e7e85] text-xs font-mono mt-2">
+            Not ChatGPT: its connectors only accept remote HTTPS servers, and this one runs on your own machine.
+          </p>
+          <p className="text-[#7e7e85] text-xs font-mono mt-2">
             Step by step, with screenshots of what to fill in:{' '}
             <a
               href="/connect-claude/"

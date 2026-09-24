@@ -206,6 +206,14 @@ npx -y actual-budget-mcp --verify</code></pre>
         Still stuck? <a href="https://github.com/henfrydls/actual-budget-mcp/issues">Open an issue</a> with the output of <code>--verify</code>, without your password.
       </p>
 
+      <h2>Does it work with ChatGPT?</h2>
+      <p>
+        No. ChatGPT's connectors only accept remote MCP servers: a public HTTPS endpoint speaking SSE or Streamable HTTP. This server is a process that runs on your own machine, and there is no way to point ChatGPT at it. OpenAI does offer a tunnel for local servers, but it is limited to enterprise plans.
+      </p>
+      <p class="muted">
+        Making it work would mean exposing your Actual server to the internet, which is the opposite of what most people running Actual want. Anything that can start a local MCP process works instead: Claude Desktop, Claude Code, Cursor, VS Code, Gemini CLI, or your own setup pointed at a local model.
+      </p>
+
       <h2>What Claude can do once connected</h2>
       <p>
         Read accounts, transactions, categories and budgets; compare budget against actual, show trends and project spending; and write when you ask it to: add or fix transactions, move money between categories, manage payees and rules. Every delete previews what it will remove and waits for you to confirm. There is also an opt-in read-only mode if you only want questions answered. The <a href="/#tools">full list of tools</a> is on the home page.
