@@ -208,7 +208,7 @@ npx -y actual-budget-mcp --verify</code></pre>
 
       <h2>Does it work with ChatGPT?</h2>
       <p>
-        No. ChatGPT's connectors only accept remote MCP servers: a public HTTPS endpoint speaking SSE or Streamable HTTP. This server is a process that runs on your own machine, and there is no way to point ChatGPT at it. OpenAI does offer a tunnel for local servers, but it is limited to enterprise plans.
+        No. ChatGPT's connectors only accept remote MCP servers: a public HTTPS endpoint speaking SSE or Streamable HTTP. Since 0.12.0 this server can be one, but what we have read says their connectors sign in through OAuth or not at all and cannot send the fixed token it takes, and nobody here has tried it.
       </p>
       <p class="muted">
         Making it work would mean exposing your Actual server to the internet, which is the opposite of what most people running Actual want. Anything that can start a local MCP process works instead: Claude Desktop, Claude Code, Cursor, VS Code, Gemini CLI, or your own setup pointed at a local model.
