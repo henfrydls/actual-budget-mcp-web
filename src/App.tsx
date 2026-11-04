@@ -299,7 +299,7 @@ function App() {
               Download the extension <ArrowRightIcon />
             </a>
             <p className="text-[#7e7e85] text-xs font-mono mt-3">
-              56 MB, everything included. No Node.js needed: Claude Desktop runs it on the one it ships with. On Windows, drag it into Settings, Extensions:
+              44 MB, everything included. No Node.js needed: Claude Desktop runs it on the one it ships with. On Windows, drag it into Settings, Extensions:
               double-clicking the file does not open Claude.
             </p>
           </div>
