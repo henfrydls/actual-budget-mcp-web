@@ -15,8 +15,8 @@ const prompts = [
 const categories = [
   {
     name: 'Read',
-    count: 9,
-    tools: 'accounts · budget · transactions · categories · payees · rules · balances · history · summary',
+    count: 11,
+    tools: 'accounts · budget · transactions · categories · payees · rules · schedules · balances · history · summary · reconcile check',
   },
   {
     name: 'Analyze',
@@ -25,8 +25,8 @@ const categories = [
   },
   {
     name: 'Write & maintain',
-    count: 23,
-    tools: 'create · split · update · delete · transfer · recategorize · budget amounts · categories · payees · rules · bank sync · currency reconciliation · sync repair',
+    count: 28,
+    tools: 'create · split · update · delete · transfer · recategorize · budget amounts · categories · payees · rules · accounts · bank sync · currency reconciliation · sync repair',
   },
 ]
 
@@ -37,7 +37,9 @@ const differentiators = [
   'Multi-currency that survives reality - split transactions and residual reconciliation',
   'Say names, not IDs - "Checking" or "Groceries", not UUIDs',
   'Natural dates in English and Spanish - "last month", "este mes", "hace 3 meses"',
-  'Built on @actual-app/api 26.8, and tested against the version you install',
+  'Over HTTP when you need it - one server for remote clients, a read path and a write path, each behind its own token',
+  'More than one budget from one server, each opened in its own process and named in the reply',
+  'Built on @actual-app/api 26.11, and tested against the version you install',
 ]
 
 function App() {
@@ -99,7 +101,7 @@ function App() {
             {/* Trust line */}
             <div className="flex items-center justify-center gap-2 mt-8 text-[#7e7e85] text-sm">
               <ShieldIcon className="w-3.5 h-3.5" />
-              <span>Runs locally. Your financial data never leaves your machine.</span>
+              <span>Runs locally by default. Your financial data never leaves your machine.</span>
             </div>
             <p className="text-center mt-2 text-[#7e7e85] text-sm">
               Listed in the{' '}
@@ -217,7 +219,7 @@ function App() {
             Read, analyze, and edit.
           </h2>
           <p className="text-[#7e7e85] mb-10 text-sm">
-            37 tools across 3 categories. Everything you need without leaving the conversation.
+            44 tools across 3 categories. Everything you need without leaving the conversation.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-14">
@@ -297,7 +299,7 @@ function App() {
               Download the extension <ArrowRightIcon />
             </a>
             <p className="text-[#7e7e85] text-xs font-mono mt-3">
-              56 MB, everything included. No Node.js needed: Claude Desktop runs it on the one it ships with. On Windows, drag it into Settings, Extensions:
+              44 MB, everything included. No Node.js needed: Claude Desktop runs it on the one it ships with. On Windows, drag it into Settings, Extensions:
               double-clicking the file does not open Claude.
             </p>
           </div>
@@ -323,7 +325,30 @@ function App() {
             Your budget ID is the Sync ID in Actual under Settings → Show advanced settings.
           </p>
           <p className="text-[#7e7e85] text-xs font-mono mt-2">
-            Not ChatGPT: its connectors only accept remote HTTPS servers, and this one runs on your own machine.
+            Not ChatGPT yet: its connectors sign in through OAuth, and this server takes a fixed token over HTTP.
+          </p>
+          <p className="text-[#7e7e85] text-xs font-mono mt-2">
+            Serving it to a remote client, or more than one budget from one server:{' '}
+            <a
+              href="https://github.com/henfrydls/actual-budget-mcp#running-it-over-http"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:text-[#a1a1a8] transition-colors duration-200 cursor-pointer"
+              aria-label="Running it over HTTP, in the README (opens in new tab)"
+            >
+              running it over HTTP
+            </a>
+            {' and '}
+            <a
+              href="https://github.com/henfrydls/actual-budget-mcp#more-than-one-budget"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:text-[#a1a1a8] transition-colors duration-200 cursor-pointer"
+              aria-label="More than one budget, in the README (opens in new tab)"
+            >
+              more than one budget
+            </a>
+            .
           </p>
           <p className="text-[#7e7e85] text-xs font-mono mt-2">
             Step by step, with screenshots of what to fill in:{' '}

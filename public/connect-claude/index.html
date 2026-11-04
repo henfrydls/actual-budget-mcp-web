@@ -133,7 +133,7 @@
         The shortest route, and the one to take unless you have a reason not to. Download <a href="https://github.com/henfrydls/actual-budget-mcp/releases/latest/download/actual-budget-mcp.mcpb"><strong>actual-budget-mcp.mcpb</strong></a>, then in Claude Desktop open <strong>Settings</strong>, go to <strong>Extensions</strong>, and drag the file onto that screen. Claude asks for your server URL, Sync ID and password in a form, and keeps the password in your operating system's credential store.
       </p>
       <p class="muted">
-        On Windows, drag the file into that screen: double-clicking it does not open Claude, because the app does not register the <code>.mcpb</code> file type. The extension carries everything it needs and does not compile anything, and it does not need Node.js installed either: Claude Desktop runs it on the Node it ships with. Checked on Windows 11 with Node renamed out of the way. It is 56 MB, downloaded once.
+        On Windows, drag the file into that screen: double-clicking it does not open Claude, because the app does not register the <code>.mcpb</code> file type. The extension carries everything it needs and does not compile anything, and it does not need Node.js installed either: Claude Desktop runs it on the Node it ships with. Checked on Windows 11 with Node renamed out of the way. It is 44 MB, downloaded once.
       </p>
       <p class="muted">
         Prefer to edit the configuration by hand, or use a different client? The rest of this step covers that.
@@ -208,7 +208,7 @@ npx -y actual-budget-mcp --verify</code></pre>
 
       <h2>Does it work with ChatGPT?</h2>
       <p>
-        No. ChatGPT's connectors only accept remote MCP servers: a public HTTPS endpoint speaking SSE or Streamable HTTP. This server is a process that runs on your own machine, and there is no way to point ChatGPT at it. OpenAI does offer a tunnel for local servers, but it is limited to enterprise plans.
+        No. ChatGPT's connectors only accept remote MCP servers: a public HTTPS endpoint speaking SSE or Streamable HTTP. Since 0.12.0 this server can be one, but what we have read says their connectors sign in through OAuth or not at all and cannot send the fixed token it takes, and nobody here has tried it.
       </p>
       <p class="muted">
         Making it work would mean exposing your Actual server to the internet, which is the opposite of what most people running Actual want. Anything that can start a local MCP process works instead: Claude Desktop, Claude Code, Cursor, VS Code, Gemini CLI, or your own setup pointed at a local model.
